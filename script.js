@@ -1,16 +1,17 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const hint = document.getElementById("hint");
-const sheet = document.getElementById("sheet");
+const card = document.getElementById("card");
 const floatLayer = document.getElementById("floatLayer");
 
-// “No” messages: unique + not too spammy
+const FINAL_AT = 4; // after 4 clicks, No starts dodging
+
 const noTexts = [
   "No 🙃",
   "hmm… are you sure? 🥺",
   "Lam is pouting 💗",
-  "okay… this is getting serious 😭",
-  "last “no” before it runs away 😈"
+  "okay… last normal “no” 😈",
+  "too late 😭💞"
 ];
 
 let noCount = 0;
@@ -31,25 +32,27 @@ function popHeart(x, y) {
 }
 
 // ambient hearts
-setInterval(() => {
-  popHeart(Math.random() * window.innerWidth, window.innerHeight + 30);
-}, 420);
+setInterval(() => popHeart(Math.random() * innerWidth, innerHeight + 30), 420);
 
 function growYes() {
-  const scale = 1 + Math.min(noCount, 10) * 0.08;
+  const scale = 1 + Math.min(noCount, 10) * 0.085;
   yesBtn.style.transform = `scale(${scale})`;
 }
 
-// Only used in FINAL stage
-function dodgeInsideSheet() {
-  const sheetRect = sheet.getBoundingClientRect();
+function finalStage() {
+  return noCount >= FINAL_AT;
+}
+
+// Only used at the end
+function dodgeInsideCard() {
+  const cardRect = card.getBoundingClientRect();
   const btnRect = noBtn.getBoundingClientRect();
 
   noBtn.style.position = "absolute";
 
-  const pad = 16;
-  const maxX = sheetRect.width - btnRect.width - pad;
-  const maxY = sheetRect.height - btnRect.height - pad;
+  const pad = 18;
+  const maxX = cardRect.width - btnRect.width - pad;
+  const maxY = cardRect.height - btnRect.height - pad;
 
   const x = pad + Math.random() * Math.max(1, maxX - pad);
   const y = pad + Math.random() * Math.max(1, maxY - pad);
@@ -58,13 +61,13 @@ function dodgeInsideSheet() {
   noBtn.style.top = `${y}px`;
 }
 
-// FINAL stage trigger: after 4 “no” clicks
-function isFinalStage() {
-  return noCount >= 4;
-}
+// YES redirect (keeps it a real button)
+yesBtn.addEventListener("click", () => {
+  window.location.href = "yes.html";
+});
 
 noBtn.addEventListener("click", (e) => {
-  // hearts burst on click (cute feedback)
+  // cute burst on click
   for (let i = 0; i < 6; i++) {
     popHeart(
       e.clientX + (Math.random() * 80 - 40),
@@ -72,15 +75,16 @@ noBtn.addEventListener("click", (e) => {
     );
   }
 
-  // If final stage: it RUNS AWAY only now
-  if (isFinalStage()) {
-    hint.textContent = "oops… too late 😈💞";
+  // At final stage: it dodges (only now)
+  if (finalStage()) {
+    hint.textContent = "okay now it runs away 😈💞";
     growYes();
-    dodgeInsideSheet();
+    dodgeInsideCard();
+    noBtn.textContent = noTexts[noTexts.length - 1];
     return;
   }
 
-  // Normal stage: no movement, just soft progression
+  // Normal stage: NO MOVEMENT
   noCount++;
   noBtn.textContent = noTexts[Math.min(noCount, noTexts.length - 1)];
   growYes();
@@ -88,6 +92,11 @@ noBtn.addEventListener("click", (e) => {
   hint.textContent =
     noCount === 1 ? "I’m literally a sweetheart 🥺" :
     noCount === 2 ? "don’t do Lam like that 😭💗" :
-    noCount === 3 ? "okay… you’re making Yes stronger 😈" :
+    noCount === 3 ? "one more and it gets chaotic 😈" :
     "";
+});
+
+// Extra: in final stage, it dodges when they try to hover it
+noBtn.addEventListener("mouseenter", () => {
+  if (finalStage()) dodgeInsideCard();
 });
