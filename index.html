@@ -1,53 +1,75 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lam 💗</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lam 💗</title>
 
-    <!-- cute font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-  <body>
-    <div class="bg">
-      <div class="grain"></div>
-      <div class="glow g1"></div>
-      <div class="glow g2"></div>
-      <div class="glow g3"></div>
-      <div id="floatLayer" class="float-layer" aria-hidden="true"></div>
+<body>
+  <!-- aesthetic background -->
+  <div class="bg" aria-hidden="true">
+    <div class="grain"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+    <div id="floatLayer" class="float-layer"></div>
+  </div>
+
+  <!-- sticker area (top, not a middle box) -->
+  <header class="hero">
+    <div class="sticker" aria-label="Cute animated sticker">
+      <!-- Custom kawaii sticker SVG (unique + animated with CSS) -->
+      <svg viewBox="0 0 240 240" role="img" aria-label="Kawaii heart buddy">
+        <!-- shadow -->
+        <ellipse class="s-shadow" cx="120" cy="200" rx="64" ry="16"></ellipse>
+
+        <!-- body -->
+        <path class="s-body" d="M120 55
+          C95 30, 55 40, 50 80
+          C44 125, 90 152, 120 176
+          C150 152, 196 125, 190 80
+          C185 40, 145 30, 120 55Z"></path>
+
+        <!-- cheeks -->
+        <circle class="s-cheek" cx="84" cy="122" r="10"></circle>
+        <circle class="s-cheek" cx="156" cy="122" r="10"></circle>
+
+        <!-- eyes -->
+        <ellipse class="s-eye" cx="98" cy="112" rx="8" ry="10"></ellipse>
+        <ellipse class="s-eye" cx="142" cy="112" rx="8" ry="10"></ellipse>
+
+        <!-- mouth -->
+        <path class="s-mouth" d="M112 132 C120 140, 128 140, 136 132" fill="none"></path>
+
+        <!-- sparkle hearts -->
+        <text class="s-mini" x="35" y="65">💗</text>
+        <text class="s-mini" x="185" y="85">✨</text>
+        <text class="s-mini" x="170" y="45">💞</text>
+      </svg>
+    </div>
+  </header>
+
+  <!-- bottom “sheet” (more practical than a center card) -->
+  <main class="sheet" id="sheet">
+    <div class="meta">from <b>Lam</b> 💗</div>
+    <h1 class="title">Will you be my Valentine?</h1>
+    <p class="subtitle">I promise I’m a sweetheart.</p>
+
+    <div class="btn-area" id="btnArea">
+      <a class="btn yes" id="yesBtn" href="yes.html">Yes 💞</a>
+      <button class="btn no" id="noBtn" type="button">No 🙃</button>
     </div>
 
-    <main class="wrap">
-      <section class="card" id="card">
-        <div class="top">
-          <span class="pill">from <b>Lam</b> 💗</span>
-          <span class="pill ghost">tap “No” if you dare 😈</span>
-        </div>
+    <p class="hint" id="hint"></p>
+  </main>
 
-        <h1 class="title">Will you be my Valentine? 💖</h1>
-        <p class="subtitle">cute + cozy vibes only ✨</p>
-
-        <div class="btn-area" id="btnArea">
-          <a class="btn yes" id="yesBtn" href="yes.html">
-            Yes 💞
-          </a>
-
-          <button class="btn no" id="noBtn" type="button">
-            No 🙃
-          </button>
-        </div>
-
-        <p class="hint" id="hint">be nice to Lam 😭💗</p>
-      </section>
-
-      <p class="footer">made with ♡ by Lam</p>
-    </main>
-
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
