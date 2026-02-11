@@ -3,26 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For you 💗</title>
+    <title>Lam 💗</title>
+
+    <!-- cute font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <div class="bg-hearts" aria-hidden="true"></div>
+    <div class="bg">
+      <div class="grain"></div>
+      <div class="glow g1"></div>
+      <div class="glow g2"></div>
+      <div class="glow g3"></div>
+      <div id="floatLayer" class="float-layer" aria-hidden="true"></div>
+    </div>
 
-    <main class="card">
-      <div class="badge">From <b>Lam</b> 💘</div>
+    <main class="wrap">
+      <section class="card" id="card">
+        <div class="top">
+          <span class="pill">from <b>Lam</b> 💗</span>
+          <span class="pill ghost">tap “No” if you dare 😈</span>
+        </div>
 
-      <h1>Will you be my Valentine? 💗</h1>
-      <p class="sub">I promise snacks, laughs, and cute pics 📸✨</p>
+        <h1 class="title">Will you be my Valentine? 💖</h1>
+        <p class="subtitle">cute + cozy vibes only ✨</p>
 
-      <div class="buttons" id="btnArea">
-        <a class="btn yes" id="yesBtn" href="yes.html">Yes 💞</a>
-        <button class="btn no" id="noBtn" type="button">No 🙃</button>
-      </div>
+        <div class="btn-area" id="btnArea">
+          <a class="btn yes" id="yesBtn" href="yes.html">
+            Yes 💞
+          </a>
 
-      <p class="hint" id="hint">don’t be shy… hehe 💓</p>
-      <p class="tiny">made with ♡ by Lam</p>
+          <button class="btn no" id="noBtn" type="button">
+            No 🙃
+          </button>
+        </div>
+
+        <p class="hint" id="hint">be nice to Lam 😭💗</p>
+      </section>
+
+      <p class="footer">made with ♡ by Lam</p>
     </main>
 
     <script src="script.js"></script>
