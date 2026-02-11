@@ -13,7 +13,6 @@
 </head>
 
 <body>
-  <!-- aesthetic background -->
   <div class="bg" aria-hidden="true">
     <div class="grain"></div>
     <div class="glow g1"></div>
@@ -22,52 +21,35 @@
     <div id="floatLayer" class="float-layer"></div>
   </div>
 
-  <!-- sticker area (top, not a middle box) -->
-  <header class="hero">
-    <div class="sticker" aria-label="Cute animated sticker">
-      <!-- Custom kawaii sticker SVG (unique + animated with CSS) -->
-      <svg viewBox="0 0 240 240" role="img" aria-label="Kawaii heart buddy">
-        <!-- shadow -->
-        <ellipse class="s-shadow" cx="120" cy="200" rx="64" ry="16"></ellipse>
-
-        <!-- body -->
-        <path class="s-body" d="M120 55
-          C95 30, 55 40, 50 80
-          C44 125, 90 152, 120 176
-          C150 152, 196 125, 190 80
-          C185 40, 145 30, 120 55Z"></path>
-
-        <!-- cheeks -->
-        <circle class="s-cheek" cx="84" cy="122" r="10"></circle>
-        <circle class="s-cheek" cx="156" cy="122" r="10"></circle>
-
-        <!-- eyes -->
-        <ellipse class="s-eye" cx="98" cy="112" rx="8" ry="10"></ellipse>
-        <ellipse class="s-eye" cx="142" cy="112" rx="8" ry="10"></ellipse>
-
-        <!-- mouth -->
-        <path class="s-mouth" d="M112 132 C120 140, 128 140, 136 132" fill="none"></path>
-
-        <!-- sparkle hearts -->
-        <text class="s-mini" x="35" y="65">💗</text>
-        <text class="s-mini" x="185" y="85">✨</text>
-        <text class="s-mini" x="170" y="45">💞</text>
-      </svg>
-    </div>
-  </header>
-
-  <!-- bottom “sheet” (more practical than a center card) -->
-  <main class="sheet" id="sheet">
-    <div class="meta">from <b>Lam</b> 💗</div>
-    <h1 class="title">Will you be my Valentine?</h1>
-    <p class="subtitle">I promise I’m a sweetheart.</p>
-
-    <div class="btn-area" id="btnArea">
-      <a class="btn yes" id="yesBtn" href="yes.html">Yes 💞</a>
-      <button class="btn no" id="noBtn" type="button">No 🙃</button>
+  <main class="stage">
+    <!-- cute sticker -->
+    <div class="sticker" aria-hidden="true">
+      <div class="heart-face">
+        <div class="spark s1">✨</div>
+        <div class="spark s2">💞</div>
+        <div class="face">
+          <span class="eye"></span><span class="eye"></span>
+          <span class="smile"></span>
+          <span class="blush b1"></span><span class="blush b2"></span>
+        </div>
+      </div>
+      <div class="shadow"></div>
     </div>
 
-    <p class="hint" id="hint"></p>
+    <!-- main card (like your first version) -->
+    <section class="card" id="card">
+      <div class="badge">from <b>Lam</b> 💗</div>
+
+      <h1>Will you be my Valentine? 💖</h1>
+      <p class="sub">I promise I’m a sweetheart.</p>
+
+      <div class="buttons" id="btnArea">
+        <button class="btn yes" id="yesBtn" type="button">Yes 💞</button>
+        <button class="btn no" id="noBtn" type="button">No 🙃</button>
+      </div>
+
+      <p class="hint" id="hint"> </p>
+    </section>
   </main>
 
   <script src="script.js"></script>
