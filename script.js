@@ -1,27 +1,28 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const hint = document.getElementById("hint");
-const card = document.querySelector(".card");
+const card = document.getElementById("card");
+const floatLayer = document.getElementById("floatLayer");
 
-const messages = [
+const noTexts = [
   "No 🙃",
-  "are you sure? 🥺",
-  "Lam is sad… 💔",
-  "pls pls pls 💗",
-  "okay but… I’m cute 😭",
-  "don’t do this to me 😔",
-  "last chance!! 💘",
-  "you’re making the Yes button stronger 😈💞"
+  "wait… no? 🥺",
+  "are you sure?? 💔",
+  "Lam is gonna cry 😭",
+  "pls say yes 💗",
+  "okay last chance 😳",
+  "NO button is shy now 😈",
+  "you can’t catch me 💞"
 ];
 
-let clicks = 0;
+let noCount = 0;
 
+// Smoothly teleport inside card boundaries
 function dodge() {
-  // make the No button teleport inside the card
-  noBtn.style.position = "absolute";
-
   const cardRect = card.getBoundingClientRect();
   const btnRect = noBtn.getBoundingClientRect();
+
+  noBtn.style.position = "absolute";
 
   const pad = 18;
   const maxX = cardRect.width - btnRect.width - pad;
@@ -30,55 +31,65 @@ function dodge() {
   const x = pad + Math.random() * Math.max(1, maxX - pad);
   const y = pad + Math.random() * Math.max(1, maxY - pad);
 
+  noBtn.animate(
+    [
+      { transform: "translate(0,0) scale(1)" },
+      { transform: "translate(0,0) scale(1.04)" },
+      { transform: "translate(0,0) scale(1)" }
+    ],
+    { duration: 220, easing: "ease-out" }
+  );
+
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
 }
 
 function growYes() {
-  const scale = 1 + Math.min(clicks, 10) * 0.09;
+  const scale = 1 + Math.min(noCount, 10) * 0.085;
   yesBtn.style.transform = `scale(${scale})`;
 }
 
-function sparkleHearts() {
+function popHeart(x, y) {
   const heart = document.createElement("div");
-  heart.textContent = ["💗","💖","💘","💕","💞"][Math.floor(Math.random()*5)];
-  heart.style.position = "absolute";
-  heart.style.left = `${50 + (Math.random()*120 - 60)}%`;
-  heart.style.top = `${40 + (Math.random()*60 - 30)}%`;
-  heart.style.fontSize = `${18 + Math.random()*18}px`;
-  heart.style.opacity = "0.95";
-  heart.style.transform = "translate(-50%, -50%)";
-  heart.style.pointerEvents = "none";
-  heart.style.filter = "drop-shadow(0 10px 14px rgba(0,0,0,.15))";
+  heart.className = "float";
+  heart.textContent = ["💗","💖","💘","💕","💞","✨"][Math.floor(Math.random() * 6)];
+  heart.style.left = `${x}px`;
+  heart.style.top = `${y}px`;
+  heart.style.fontSize = `${16 + Math.random() * 18}px`;
 
-  card.appendChild(heart);
+  const duration = 2600 + Math.random() * 1200;
+  heart.style.animationDuration = `${duration}ms`;
 
-  const driftX = (Math.random() * 80 - 40);
-  const driftY = (Math.random() * -120 - 60);
-
-  heart.animate(
-    [
-      { transform: "translate(-50%, -50%)", opacity: 0.95 },
-      { transform: `translate(calc(-50% + ${driftX}px), calc(-50% + ${driftY}px))`, opacity: 0 }
-    ],
-    { duration: 900, easing: "ease-out" }
-  );
-
-  setTimeout(() => heart.remove(), 950);
+  floatLayer.appendChild(heart);
+  setTimeout(() => heart.remove(), duration + 50);
 }
 
+// background floating hearts (ambient)
+setInterval(() => {
+  const x = Math.random() * window.innerWidth;
+  const y = window.innerHeight + 30;
+  popHeart(x, y);
+}, 420);
+
+// when hovering / clicking no
 noBtn.addEventListener("mouseenter", () => {
-  if (clicks >= 1) dodge();
+  if (noCount >= 1) dodge();
 });
 
-noBtn.addEventListener("click", () => {
-  clicks++;
-  noBtn.textContent = messages[Math.min(clicks, messages.length - 1)];
-  hint.textContent = clicks < 3
-    ? "hmm… that’s not very sweetheart of you 💞"
-    : "the No button is shy now 😭💗";
+noBtn.addEventListener("click", (e) => {
+  noCount++;
+  noBtn.textContent = noTexts[Math.min(noCount, noTexts.length - 1)];
 
-  sparkleHearts();
+  hint.textContent =
+    noCount <= 2 ? "hmm… that’s not very sweet 😭💗" :
+    noCount <= 5 ? "the No button is slippery now 😈" :
+    "okay okay… just press YES 💞";
+
   growYes();
   dodge();
+
+  // burst hearts around click
+  for (let i = 0; i < 6; i++) {
+    popHeart(e.clientX + (Math.random() * 80 - 40), e.clientY + (Math.random() * 60 - 30));
+  }
 });
