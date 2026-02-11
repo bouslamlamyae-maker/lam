@@ -93,3 +93,4 @@ noBtn.addEventListener("click", (e) => {
     popHeart(e.clientX + (Math.random() * 80 - 40), e.clientY + (Math.random() * 60 - 30));
   }
 });
+
